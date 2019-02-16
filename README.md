@@ -1,9 +1,6 @@
-
-
 # Extendlab WordPress Plugin
 
-
-This little plugin is for showing a preview of a linked article in your WordPress blog
+This little plugin is for showing a preview of a linked post or page in your WordPress blog
 
 ## How to Install
 
