@@ -9,7 +9,7 @@ This little plugin is for showing a preview of a linked article in your WordPres
 
 ### From the WordPress Plugin Directory
 
-The Official Po.et WordPress Plugin can be found here: https://wordpress.org/plugins/po-et/
+At the moment this plugin is under development, so you cannot download it from wordpress plugin directory.
 
 ### From this repository
 
