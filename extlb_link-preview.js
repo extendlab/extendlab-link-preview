@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 	$('.entry-content a').hover(function () {
-		console.log('Mouse entered!');
+		// console.log('Mouse entered!');
 
 		// ON MOUSE ENTER
 		var hovered_link = $(this)
@@ -12,7 +12,7 @@ jQuery(document).ready(function ($) {
 		var offset_y = 40;
 
 		var data = {
-			'action': 'show_post_preview',
+			'action': 'show_link_preview',
 			'link': link_url,
 			// 'link': ajax_object.special_value
 		};
@@ -53,17 +53,15 @@ jQuery(document).ready(function ($) {
 					}
 				}
 
-				console.log(response.status_message);
-
 			} else if (response.status == 'error') {
-				console.log(response.status_message);
+				console.log( 'Extendlab Link Preview: ' + response.status_message);
 			}
 
 		});
 
 
 	}, function () {
-		console.log('Mouse leaved!');
+		// console.log('Mouse leaved!');
 		$(".extlb-popup").remove();
 	});
 });

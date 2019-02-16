@@ -13,14 +13,12 @@ Text Domain: extlb
 
 // ADD THE PLUGIN SCRIPS AND STYLES
 function extlb_scripts_styles(){
-	wp_register_script( 'extlb_main', plugins_url( 'main.js', __FILE__ ), array( 'jquery' ), '1.1', true );
-	wp_enqueue_script( 'extlb_main' );
-	wp_register_script( 'extlb_main', plugins_url( 'main.js', __FILE__ ), array( 'jquery' ), '1.1', true );
-	wp_enqueue_script( 'extlb_main' );
+	wp_register_script( 'extlb_link-preview', plugins_url( 'extlb_link-preview.js', __FILE__ ), array( 'jquery' ), '1.1', true );
+	wp_enqueue_script( 'extlb_link-preview' );
 
-	wp_localize_script( 'extlb_main', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'special_value' => 'insert your stuff' ) );
+	wp_localize_script( 'extlb_link-preview', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'special_value' => 'insert your stuff' ) );
 
-	wp_enqueue_style( 'extlb_main', plugins_url( 'main.css', __FILE__ ), '', '1.1' );
+	wp_enqueue_style( 'extlb_link-preview', plugins_url( 'extlb_link-preview.css', __FILE__ ), '', '1.1' );
 }
 add_action( 'wp_enqueue_scripts', 'extlb_scripts_styles' );
 
@@ -32,7 +30,7 @@ add_action( 'init', 'extlb_image_sizes' );
 
 
 // HERE THE AJAX-FUNCTION
-function extlb_show_post_preview (){
+function extlb_show_link_preview (){
 	$link = $_POST['link'] ;
 	$status = 'success';
 	$status_message = 'Übertragung erfolgreich!';
@@ -81,8 +79,8 @@ function extlb_show_post_preview (){
 
 	wp_die(); // this is required to terminate immediately and return a proper response
 }
-add_action( 'wp_ajax_show_post_preview', 'extlb_show_post_preview' );
-add_action( 'wp_ajax_nopriv_show_post_preview', 'extlb_show_post_preview' );
+add_action( 'wp_ajax_show_link_preview', 'extlb_show_link_preview' );
+add_action( 'wp_ajax_nopriv_show_link_preview', 'extlb_show_link_preview' );
 
 function get_post_by_link( $link ) {
 	$post_ID = url_to_postid( $link );
