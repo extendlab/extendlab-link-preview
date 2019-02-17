@@ -7,18 +7,18 @@ Plugin Name: Extendlab – Link Preview
 Plugin URI: https://extendlab.de/
 Description: Plugin to show a short preview of (internal) linked pages or posts.
 Version: 1.0.0
-Author: Fabian Pecher, Simon Pirmann
+Author: Extendlab
 Text Domain: extlb
 */
 
 // ADD THE PLUGIN SCRIPS AND STYLES
 function extlb_scripts_styles(){
-	wp_register_script( 'extlb_link-preview', plugins_url( 'extlb_link-preview.js', __FILE__ ), array( 'jquery' ), '1.1', true );
+	wp_register_script( 'extlb_link-preview', plugins_url( 'assets/js/extlb_link-preview.js', __FILE__ ), array( 'jquery' ), '1.1', true );
 	wp_enqueue_script( 'extlb_link-preview' );
 
 	wp_localize_script( 'extlb_link-preview', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'special_value' => 'insert your stuff' ) );
 
-	wp_enqueue_style( 'extlb_link-preview', plugins_url( 'extlb_link-preview.css', __FILE__ ), '', '1.1' );
+	wp_enqueue_style( 'extlb_link-preview', plugins_url( 'assets/css/extlb_link-preview.css', __FILE__ ), '', '1.1' );
 }
 add_action( 'wp_enqueue_scripts', 'extlb_scripts_styles' );
 
