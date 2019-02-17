@@ -53,8 +53,12 @@
 .extlb-popup__title {
   display: block;
   font-size: 1.25rem;
+  line-height: 1.25;
   color: #333;
   padding: 2rem 1.875rem 0 1.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 .extlb-popup__title--dark {
   color: #fff;
