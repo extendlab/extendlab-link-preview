@@ -34,6 +34,12 @@ function extlb_show_link_preview (){
 	$link = $_POST['link'] ;
 	$status = 'success';
 	$status_message = 'Übertragung erfolgreich!';
+	$options = array(
+		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
+		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
+		'hide_thumbnails' => (get_option('extlb_hide_thumbnails') == 'on') ? true : false,
+		'link_selector' => esc_attr( get_option('extlb_link_selector') )
+	);
 
 	$parsed_link = parse_url( $link );
 
@@ -71,7 +77,8 @@ function extlb_show_link_preview (){
 		'link_type' => $link_type,
 		'title' => $post_title,
 		'excerpt' => $post_content,
-		'thumbnail' => $post_thumbnail
+		'thumbnail' => $post_thumbnail,
+		'options' => $options
 	];
 
 	header('Content-Type: application/json');
@@ -81,6 +88,26 @@ function extlb_show_link_preview (){
 }
 add_action( 'wp_ajax_show_link_preview', 'extlb_show_link_preview' );
 add_action( 'wp_ajax_nopriv_show_link_preview', 'extlb_show_link_preview' );
+
+function extlb_get_options (){
+	$options = array(
+		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
+		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
+		'hide_thumbnails' => (get_option('extlb_hide_thumbnails') == 'on') ? true : false,
+		'link_selector' => esc_attr( get_option('extlb_link_selector') )
+	);
+
+	$return = [
+		'options' => $options
+	];
+
+	header('Content-Type: application/json');
+	echo json_encode($return);
+
+	wp_die(); // this is required to terminate immediately and return a proper response
+}
+add_action( 'wp_ajax_extlb_get_options', 'extlb_get_options' );
+add_action( 'wp_ajax_nopriv_extlb_get_options', 'extlb_get_options' );
 
 function get_post_by_link( $link ) {
 	$post_ID = url_to_postid( $link );
@@ -97,5 +124,7 @@ function generate_excerpt( $text, $chars = 100 ) {
 	}else {
 		return $text;
 	}
-
 }
+
+// Includes
+require_once plugin_dir_path( __FILE__ ) . 'includes/options-page.php';

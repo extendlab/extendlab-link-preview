@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+
 	$('.entry-content a').hover(function () {
 		// console.log('Mouse entered!');
 
@@ -25,32 +26,45 @@ jQuery(document).ready(function ($) {
 
 			if (response.status == 'success') {
 
+				// Stops if mobile is disabled and window size is smaller than 768px
+				if (response.options['disable_mobile'] && $(window).width() < 768)
+					return false;
+
 				if (response.link_type == 'intern') {
 					hovered_link.css('position', 'relative');
+					var append_popup = '';
 
-					if (response.thumbnail != null) {
-						// Show preview with thumbnail
-						hovered_link.append(`
-							<div class="extlb-popup" style="top: ` + offset_y + `px; left: ` + offset_x + `px;">
-								<div class="extlb-popup__image-holder extlb-popup__image-holder--top">
-									<img src="` + response.thumbnail + `" class="extlb-popup__image">
-								</div>
-								<span class="extlb-popup__title">` + response.title + `</span>
-								<span class="extlb-popup__content">` + response.excerpt + `</span>
-								<span class="extlb-popup__readmore">weiterlesen ...</span>
-							</div>
-						`);
+					// Create the popup
+					if (response.options['darkmode']) {
+						// Show darkmode
+						append_popup = '<div class="extlb-popup extlb-popup--dark" style="top: ' + offset_y + 'px; left: ' + offset_x + 'px;">';
+						if (response.thumbnail != null && response.options['hide_thumbnails'] != true ) {
+							// Show preview with thumbnail if it has one and it's not disabled
+							append_popup += '<div class="extlb-popup__image-holder extlb-popup__image-holder--top">';
+							append_popup += '<img src="' + response.thumbnail + '" class="extlb-popup__image">';
+							append_popup += '</div>';
+						}
+						append_popup += '<span class="extlb-popup__title extlb-popup__title--dark">' + response.title + '</span>';
+						append_popup += '<span class="extlb-popup__content extlb-popup__content--dark">' + response.excerpt + '</span>';
+						append_popup += '<span class="extlb-popup__readmore extlb-popup__readmore--dark">weiterlesen ...</span>';
+						append_popup += '</div>';
+					} else {
+						append_popup = '<div class="extlb-popup" style="top: ' + offset_y + 'px; left: ' + offset_x + 'px;">';
+						if (response.thumbnail != null && response.options['hide_thumbnails'] != true ) {
+							// Show preview with thumbnail
+							append_popup += '<div class="extlb-popup__image-holder extlb-popup__image-holder--top">';
+							append_popup += '<img src="' + response.thumbnail + '" class="extlb-popup__image">';
+							append_popup += '</div>';
+						}
+						append_popup += '<span class="extlb-popup__title">' + response.title + '</span>';
+						append_popup += '<span class="extlb-popup__content">' + response.excerpt + '</span>';
+						append_popup += '<span class="extlb-popup__readmore">weiterlesen ...</span>';
+						append_popup += '</div>';
 					}
-					else {
-						// Show preview without thumbnail
-						hovered_link.append(`
-							<div class="extlb-popup" style="top: ` + offset_y + `px; left: ` + offset_x + `px;">
-								<span class="extlb-popup__title">` + response.title + `</span>
-								<span class="extlb-popup__content">` + response.excerpt + `</span>
-								<span class="extlb-popup__readmore">weiterlesen ...</span>
-							</div>
-						`);
-					}
+
+
+					// Append the created popup to the hovered link
+					hovered_link.append( append_popup );
 				}
 
 			} else if (response.status == 'error') {
