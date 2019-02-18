@@ -5,6 +5,7 @@
   width: 350px;
   max-width: 90vw;
   border-radius: 4px;
+  z-index: 999;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
@@ -53,8 +54,12 @@
 .extlb-popup__title {
   display: block;
   font-size: 1.25rem;
+  line-height: 1.25;
   color: #333;
   padding: 2rem 1.875rem 0 1.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 .extlb-popup__title--dark {
   color: #fff;
@@ -95,7 +100,7 @@
 	width: 300px;
 	padding: 25px;
 	top: 35px;
-	z-index: 2;
+	z-index: 999;
 	left: 50%;
 	transform: translateX(-50%);
 	transition: all .3s ease-in-out;
