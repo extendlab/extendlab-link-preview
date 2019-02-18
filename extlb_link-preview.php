@@ -13,7 +13,7 @@ Version: 1.0.0
 Author: Extendlab
 Author URI: http://extendlab.de
 License: GPLv2 or later
-Text Domain: extlb-link-preview
+Text Domain: extlb-lp
 */
 
 // ADD THE PLUGIN SCRIPS AND STYLES
