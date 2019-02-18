@@ -5,6 +5,7 @@
   width: 350px;
   max-width: 90vw;
   border-radius: 4px;
+  z-index: 999;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
@@ -99,7 +100,7 @@
 	width: 300px;
 	padding: 25px;
 	top: 35px;
-	z-index: 2;
+	z-index: 999;
 	left: 50%;
 	transform: translateX(-50%);
 	transition: all .3s ease-in-out;
