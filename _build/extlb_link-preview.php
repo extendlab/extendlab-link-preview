@@ -23,7 +23,7 @@ function extlb_scripts_styles(){
 
 	wp_localize_script( 'extlb_link-preview', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'special_value' => 'insert your stuff' ) );
 
-	wp_enqueue_style( 'extlb_link-preview', plugins_url( '/assets/css/extlb_link-preview.min.css', __FILE__ ), '', '1.1' );
+	wp_enqueue_style( 'extlb_link-preview', plugins_url( '/assets/css/extlb_link-preview.css', __FILE__ ), '', '1.1' );
 }
 add_action( 'wp_enqueue_scripts', 'extlb_scripts_styles' );
 
