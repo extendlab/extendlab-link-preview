@@ -1,11 +1,13 @@
 var gulp = require('gulp'),
       sass = require('gulp-sass'),
       autoprefixer = require('gulp-autoprefixer'),
+      minify = require('gulp-minify'),
       zip = require('gulp-zip');
 
+var projectName = 'extlb_link-preview';
 var devFolder = '_dev';
 var buildFolder = '_build';
-var sourceFiles = ['_dev/assets/css/**/*', '_dev/assets/js/**/*', '_dev/extlb_link-preview.php', '_dev/index.php', '_dev/LICENSE'];
+var sourceFiles = ['_dev/assets/css/**/*', '_dev/' + projectName + '.php', '_dev/index.php', '_dev/LICENSE'];
 
 
 gulp.task('sass', function() {
@@ -23,6 +25,18 @@ gulp.task('scss:prod', function() {
     .pipe(gulp.dest(buildFolder + '/assets/css'))
 })
 
+gulp.task('minify:prod', function () {
+  gulp.src(devFolder + '/assets/js/*.js')
+    .pipe(minify({
+      ext: {
+        min: '.min.js'
+      },
+      ignoreFiles: ['-min.js'],
+      noSource: true
+    }))
+    .pipe(gulp.dest(buildFolder + '/assets/js'))
+});
+
 gulp.task('copy:prod', function() {
   return gulp.src(sourceFiles, { base: '_dev' })
     .pipe(gulp.dest(buildFolder))
@@ -30,7 +44,7 @@ gulp.task('copy:prod', function() {
 
 gulp.task('zip', function() {
   return gulp.src('_build/**/*')
-    .pipe(zip('extlb_link-preview.zip'))
+    .pipe(zip(projectName + '.zip'))
     .pipe(gulp.dest('_compressed'))
 })
 
@@ -40,4 +54,4 @@ gulp.task('dev', function () {
   gulp.watch(devFolder + '/assets/scss/*.scss', ['sass']);
 })
 
-gulp.task('build', ['scss:prod','copy:prod']);
+gulp.task('build', ['scss:prod', 'minify:prod', 'copy:prod']);
