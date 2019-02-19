@@ -1,5 +1,7 @@
 *.log
 
+_build/*
+_compressed/*
 package.json
 package-lock.json
 node_modules
