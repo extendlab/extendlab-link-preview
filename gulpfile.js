@@ -48,8 +48,6 @@ gulp.task('zip', function() {
     .pipe(gulp.dest('_compressed'))
 })
 
-
-///////////////////////////////
 gulp.task('dev', function () {
   gulp.watch(devFolder + '/assets/scss/*.scss', ['sass']);
 })
