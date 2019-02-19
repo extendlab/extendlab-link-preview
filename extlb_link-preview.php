@@ -11,7 +11,7 @@ Plugin URI: https://extendlab.de/
 Description: Plugin to show a short preview of (internal) linked pages or posts.
 Version: 1.0.0
 Author: Extendlab
-Author URI: http://extendlab.de
+Author URI: https://extendlab.de
 License: GPLv2 or later
 Text Domain: extlb-lp
 */
