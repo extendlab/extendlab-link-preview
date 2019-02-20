@@ -18,7 +18,7 @@ Text Domain: extlb-lp
 
 // ADD THE PLUGIN SCRIPS AND STYLES
 function extlb_scripts_styles(){
-	wp_register_script( 'extlb_link-preview', plugins_url( '/assets/js/extlb_link-preview.min.js', __FILE__ ), array( 'jquery' ), '1.1', true );
+	wp_register_script( 'extlb_link-preview', plugins_url( '/assets/js/extlb_link-preview.js', __FILE__ ), array( 'jquery' ), '1.1', true );
 	wp_enqueue_script( 'extlb_link-preview' );
 
 	wp_localize_script( 'extlb_link-preview', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'special_value' => 'insert your stuff' ) );
