@@ -5,28 +5,19 @@ var gulp = require('gulp'),
       zip = require('gulp-zip');
 
 var projectName = 'extlb_link-preview';
-var devFolder = '_dev';
 var buildFolder = '_build';
-var sourceFiles = ['_dev/assets/css/**/*', '_dev/' + projectName + '.php', '_dev/index.php', '_dev/LICENSE'];
+var sourceFiles = ['assets/css/**/*', 'assets/js/' + projectName + '.min.js', projectName + '.php', 'index.php', 'LICENSE'];
 
 
 gulp.task('sass', function() {
-  return gulp.src(devFolder + '/assets/scss/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest(devFolder + '/assets/css'))
-})
-
-
-gulp.task('scss:prod', function() {
-  return gulp.src(devFolder + '/assets/scss/*.scss')
+  return gulp.src('scss/*.scss')
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest(buildFolder + '/assets/css'))
+    .pipe(gulp.dest('assets/css'))
 })
 
 gulp.task('minify:prod', function () {
-  gulp.src(devFolder + '/assets/js/*.js')
+  gulp.src('assets/js/*.js')
     .pipe(minify({
       ext: {
         min: '.min.js'
@@ -34,22 +25,17 @@ gulp.task('minify:prod', function () {
       ignoreFiles: ['-min.js'],
       noSource: true
     }))
-    .pipe(gulp.dest(buildFolder + '/assets/js'))
+    .pipe(gulp.dest('assets/js'))
 });
 
-gulp.task('copy:prod', function() {
-  return gulp.src(sourceFiles, { base: '_dev' })
+gulp.task('zip', function() {
+  return gulp.src(sourceFiles)
+    .pipe(zip(projectName + '.zip'))
     .pipe(gulp.dest(buildFolder))
 })
 
-gulp.task('zip', function() {
-  return gulp.src('_build/**/*')
-    .pipe(zip(projectName + '.zip'))
-    .pipe(gulp.dest('_compressed'))
-})
-
 gulp.task('dev', function () {
-  gulp.watch(devFolder + '/assets/scss/*.scss', ['sass']);
+  gulp.watch('scss/*.scss', ['sass']);
 })
 
-gulp.task('build', ['scss:prod', 'minify:prod', 'copy:prod']);
+gulp.task('build', ['minify:prod']);
