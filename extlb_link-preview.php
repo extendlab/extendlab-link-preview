@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 /*
 Plugin Name: Extendlab – Link Preview
-Plugin URI: https://extendlab.de/
+Plugin URI: https://extendlab.de/wp-plugins/link-preview.html
 Description: Plugin to show a short preview of (internal) linked pages or posts.
 Version: 1.0.0
 Author: Extendlab
