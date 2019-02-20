@@ -1,31 +1,37 @@
 jQuery(document).ready(function ($) {
+<<<<<<< HEAD
 
 	$('.entry-content a').hover(function () {
 		// console.log('Mouse entered!');
+=======
+  $('.entry-content a').hover(function () {
+    // console.log('Mouse entered!');
+>>>>>>> master
 
-		// ON MOUSE ENTER
-		var hovered_link = $(this)
-		var link_text = hovered_link.html();
-		var link_url = hovered_link.attr('href');
+    // ON MOUSE ENTER
+    var hovered_link = $(this)
+    var link_text = hovered_link.html();
+    var link_url = hovered_link.attr('href');
 
-		var link_width = hovered_link.width();
-		var offset_x = Math.round(link_width / 2);
-		var offset_y = 40;
+    var link_width = hovered_link.width();
+    var offset_x = Math.round(link_width / 2);
+    var offset_y = 40;
 
-		var data = {
-			'action': 'show_link_preview',
-			'link': link_url,
-			// 'link': ajax_object.special_value
-		};
+    var data = {
+      'action': 'show_link_preview',
+      'link': link_url,
+      // 'link': ajax_object.special_value
+    };
 
-		// ajax_object.ajax_url is defined in post-preview.php in pp_scripts_styles() in wp_localize_script()
-		var ajaxurl = ajax_object.ajax_url;
+    // ajax_object.ajax_url is defined in post-preview.php in pp_scripts_styles() in wp_localize_script()
+    var ajaxurl = ajax_object.ajax_url;
 
-		$.post(ajaxurl, data, function (response) {
-			// console.log(JSON.stringify(response));
+    $.post(ajaxurl, data, function (response) {
+      // console.log(JSON.stringify(response));
 
-			if (response.status == 'success') {
+      if (response.status == 'success') {
 
+<<<<<<< HEAD
 				// Stops if mobile is disabled and window size is smaller than 768px
 				if (response.options['disable_mobile'] && $(window).width() < 768)
 					return false;
@@ -67,15 +73,15 @@ jQuery(document).ready(function ($) {
 					hovered_link.append( append_popup );
 				}
 
-			} else if (response.status == 'error') {
-				console.log( 'Extendlab Link Preview: ' + response.status_message);
-			}
+      } else if (response.status == 'error') {
+        console.log('Extendlab Link Preview: ' + response.status_message);
+      }
 
-		});
+    });
 
 
-	}, function () {
-		// console.log('Mouse leaved!');
-		$(".extlb-popup").remove();
-	});
+  }, function () {
+    // console.log('Mouse leaved!');
+    $(".extlb-popup").remove();
+  });
 });
