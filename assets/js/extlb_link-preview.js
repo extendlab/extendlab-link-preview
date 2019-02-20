@@ -1,12 +1,7 @@
 jQuery(document).ready(function ($) {
-<<<<<<< HEAD
 
 	$('.entry-content a').hover(function () {
 		// console.log('Mouse entered!');
-=======
-  $('.entry-content a').hover(function () {
-    // console.log('Mouse entered!');
->>>>>>> master
 
     // ON MOUSE ENTER
     var hovered_link = $(this)
@@ -31,7 +26,6 @@ jQuery(document).ready(function ($) {
 
       if (response.status == 'success') {
 
-<<<<<<< HEAD
 				// Stops if mobile is disabled and window size is smaller than 768px
 				if (response.options['disable_mobile'] && $(window).width() < 768)
 					return false;
@@ -68,7 +62,6 @@ jQuery(document).ready(function ($) {
 						append_popup += '</div>';
 					}
 
-
 					// Append the created popup to the hovered link
 					hovered_link.append( append_popup );
 				}
@@ -78,7 +71,6 @@ jQuery(document).ready(function ($) {
       }
 
     });
-
 
   }, function () {
     // console.log('Mouse leaved!');
