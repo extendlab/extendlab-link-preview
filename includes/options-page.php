@@ -2,7 +2,7 @@
 if ( is_admin() ){
 	// admin actions
   	add_action( 'admin_menu', 'extlbRegisterMenuEntry' );
-  	add_action( 'admin_init', 'extlbRegisterSettings' );
+	add_action( 'admin_init', 'extlbRegisterSettings' );
 } else {
   	// non-admin enqueues, actions, and filters
 }
@@ -87,7 +87,7 @@ function extlbOptionsPage() {
 				</tbody>
 
 			</table>
-	
+
 			<?php submit_button(); ?>
 		</form>
 	</div>
@@ -102,3 +102,11 @@ function extlbRegisterSettings() {
   register_setting( 'extlb-options', 'extlb_hide_thumbnails' );
   register_setting( 'extlb-options', 'extlb_link_selector' );
 }
+
+// Add selector as data-attribute to body
+function extlbBodyClasses( $classes )
+{
+	$classes[] = '" data-link-preview-selector="' . esc_attr( get_option('extlb_link_selector') ) . '"';
+    return $classes;
+}
+add_filter( 'body_class','extlbBodyClasses', 999 );

@@ -27,12 +27,22 @@ function extlb_scripts_styles(){
 }
 add_action( 'wp_enqueue_scripts', 'extlb_scripts_styles' );
 
+// Adding links to plugins-overview-page
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'extlbPluginSiteLinks' );
+function extlbPluginSiteLinks( $links ) {
+	$mylinks = array(
+		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">Settings</a>',
+		'<a href="https://extendlab.de" target="_blank">More by Extendlab</a>'
+	);
+
+	return array_merge( $links, $mylinks );
+}
+
 // Create custom image size
 function extlb_image_sizes(){
 	add_image_size( 'extlb_post_thumbnail', 350, 160, array( 'center', 'center' ) );
 }
 add_action( 'init', 'extlb_image_sizes' );
-
 
 // HERE THE AJAX-FUNCTION
 function extlb_show_link_preview (){

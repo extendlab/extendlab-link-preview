@@ -1,6 +1,12 @@
 jQuery(document).ready(function ($) {
 
-	$('.entry-content a').hover(function () {
+	var link_preview_selector = '.entry-content a';
+	if ( $('body').data('link-preview-selector') != '' ) {
+		link_preview_selector = $('body').data('link-preview-selector');
+	}
+	console.log( link_preview_selector );
+
+	$( link_preview_selector ).hover(function () {
 		// console.log('Mouse entered!');
 
     // ON MOUSE ENTER
@@ -22,7 +28,7 @@ jQuery(document).ready(function ($) {
     var ajaxurl = ajax_object.ajax_url;
 
     $.post(ajaxurl, data, function (response) {
-      // console.log(JSON.stringify(response));
+			// console.log(JSON.stringify(response));
 
       if (response.status == 'success') {
 
