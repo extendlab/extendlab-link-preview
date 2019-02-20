@@ -4,7 +4,6 @@ jQuery(document).ready(function ($) {
 	if ( $('body').data('link-preview-selector') != '' ) {
 		link_preview_selector = $('body').data('link-preview-selector');
 	}
-	console.log( link_preview_selector );
 
 	$( link_preview_selector ).hover(function () {
 		// console.log('Mouse entered!');
