@@ -17,7 +17,7 @@ gulp.task('sass', function() {
 })
 
 gulp.task('minify:prod', function () {
-  gulp.src('assets/js/*.js')
+  gulp.src('assets/js/' + projectName + '.js')
     .pipe(minify({
       ext: {
         min: '.min.js'
