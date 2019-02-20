@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 /*
 Plugin Name: Extendlab – Link Preview
-Plugin URI: https://extendlab.de/
+Plugin URI: https://extendlab.de/wp-plugins/link-preview.html
 Description: Plugin to show a short preview of (internal) linked pages or posts.
 Version: 1.0.0
 Author: Extendlab
@@ -18,7 +18,7 @@ Text Domain: extlb-lp
 
 // ADD THE PLUGIN SCRIPS AND STYLES
 function extlb_scripts_styles(){
-	wp_register_script( 'extlb_link-preview', plugins_url( '/assets/js/extlb_link-preview.min.js', __FILE__ ), array( 'jquery' ), '1.1', true );
+	wp_register_script( 'extlb_link-preview', plugins_url( '/assets/js/extlb_link-preview.js', __FILE__ ), array( 'jquery' ), '1.1', true );
 	wp_enqueue_script( 'extlb_link-preview' );
 
 	wp_localize_script( 'extlb_link-preview', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'special_value' => 'insert your stuff' ) );
@@ -27,18 +27,34 @@ function extlb_scripts_styles(){
 }
 add_action( 'wp_enqueue_scripts', 'extlb_scripts_styles' );
 
+// Adding links to plugins-overview-page
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'extlbPluginSiteLinks' );
+function extlbPluginSiteLinks( $links ) {
+	$mylinks = array(
+		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">Settings</a>',
+		'<a href="https://extendlab.de" target="_blank">More by Extendlab</a>'
+	);
+
+	return array_merge( $links, $mylinks );
+}
+
 // Create custom image size
 function extlb_image_sizes(){
 	add_image_size( 'extlb_post_thumbnail', 350, 160, array( 'center', 'center' ) );
 }
 add_action( 'init', 'extlb_image_sizes' );
 
-
 // HERE THE AJAX-FUNCTION
 function extlb_show_link_preview (){
 	$link = $_POST['link'] ;
 	$status = 'success';
 	$status_message = 'Übertragung erfolgreich!';
+	$options = array(
+		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
+		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
+		'hide_thumbnails' => (get_option('extlb_hide_thumbnails') == 'on') ? true : false,
+		'link_selector' => esc_attr( get_option('extlb_link_selector') )
+	);
 
 	$parsed_link = parse_url( $link );
 
@@ -76,7 +92,8 @@ function extlb_show_link_preview (){
 		'link_type' => $link_type,
 		'title' => $post_title,
 		'excerpt' => $post_content,
-		'thumbnail' => $post_thumbnail
+		'thumbnail' => $post_thumbnail,
+		'options' => $options
 	];
 
 	header('Content-Type: application/json');
@@ -86,6 +103,26 @@ function extlb_show_link_preview (){
 }
 add_action( 'wp_ajax_show_link_preview', 'extlb_show_link_preview' );
 add_action( 'wp_ajax_nopriv_show_link_preview', 'extlb_show_link_preview' );
+
+function extlb_get_options (){
+	$options = array(
+		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
+		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
+		'hide_thumbnails' => (get_option('extlb_hide_thumbnails') == 'on') ? true : false,
+		'link_selector' => esc_attr( get_option('extlb_link_selector') )
+	);
+
+	$return = [
+		'options' => $options
+	];
+
+	header('Content-Type: application/json');
+	echo json_encode($return);
+
+	wp_die(); // this is required to terminate immediately and return a proper response
+}
+add_action( 'wp_ajax_extlb_get_options', 'extlb_get_options' );
+add_action( 'wp_ajax_nopriv_extlb_get_options', 'extlb_get_options' );
 
 function get_post_by_link( $link ) {
 	$post_ID = url_to_postid( $link );
@@ -102,5 +139,7 @@ function generate_excerpt( $text, $chars = 100 ) {
 	}else {
 		return $text;
 	}
-
 }
+
+// Includes
+require_once plugin_dir_path( __FILE__ ) . 'includes/options-page.php';

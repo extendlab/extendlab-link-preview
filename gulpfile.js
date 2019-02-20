@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 
 var projectName = 'extlb_link-preview';
 var buildFolder = '_build';
-var sourceFiles = ['assets/css/**/*', 'assets/js/' + projectName + '.min.js', projectName + '.php', 'index.php', 'LICENSE'];
+var sourceFiles = ['assets/css/**', 'assets/js/' + projectName + '.min.js', projectName + '.php', 'index.php', 'includes/**', 'LICENSE'];
 
 
 gulp.task('sass', function() {
@@ -17,19 +17,19 @@ gulp.task('sass', function() {
 })
 
 gulp.task('minify:prod', function () {
-  gulp.src('assets/js/*.js')
+  gulp.src('assets/js/' + projectName + '.js')
     .pipe(minify({
       ext: {
         min: '.min.js'
       },
-      ignoreFiles: ['-min.js'],
+      ignoreFiles: ['.min.js'],
       noSource: true
     }))
     .pipe(gulp.dest('assets/js'))
 });
 
 gulp.task('zip', function() {
-  return gulp.src(sourceFiles)
+  return gulp.src(sourceFiles, { base: './' })
     .pipe(zip(projectName + '.zip'))
     .pipe(gulp.dest(buildFolder))
 })
