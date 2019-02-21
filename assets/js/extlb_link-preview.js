@@ -51,7 +51,7 @@ jQuery(document).ready(function ($) {
 						}
 						append_popup += '<span class="extlb-popup__title extlb-popup__title--dark">' + response.title + '</span>';
 						append_popup += '<span class="extlb-popup__content extlb-popup__content--dark">' + response.excerpt + '</span>';
-						append_popup += '<span class="extlb-popup__readmore extlb-popup__readmore--dark">weiterlesen ...</span>';
+						append_popup += '<span class="extlb-popup__readmore extlb-popup__readmore--dark">' + response.read_more_text + '</span>';
 						append_popup += '</div>';
 					} else {
 						append_popup = '<div class="extlb-popup" style="top: ' + offset_y + 'px; left: ' + offset_x + 'px;">';
@@ -63,7 +63,7 @@ jQuery(document).ready(function ($) {
 						}
 						append_popup += '<span class="extlb-popup__title">' + response.title + '</span>';
 						append_popup += '<span class="extlb-popup__content">' + response.excerpt + '</span>';
-						append_popup += '<span class="extlb-popup__readmore">weiterlesen ...</span>';
+						append_popup += '<span class="extlb-popup__readmore">' + response.read_more_text + '</span>';
 						append_popup += '</div>';
 					}
 

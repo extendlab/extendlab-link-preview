@@ -11,8 +11,8 @@ if ( is_admin() ){
 function extlbRegisterMenuEntry() {
 	// add_options_page( 'Link Preview Settings', 'Link Preview', 'switch_themes', 'extlb-options-page', 'extlbOptionsPage', $icon_url, $position );
 
-	$page_title = 'Extendlab - Link Preview Settings';
-	$menu_title = 'Extendlab - Link Preview';
+	$page_title = __('Extendlab - Link Preview Settings', 'extlb-lp');
+	$menu_title = __('Extendlab - Link Preview', 'extlb-lp');
 	$capability = 'switch_themes';
 	$menu_slug = 'extlb-options-page';
 	$function = 'extlbOptionsPage';
@@ -22,28 +22,28 @@ function extlbRegisterMenuEntry() {
 // The options-page function
 function extlbOptionsPage() {
 	if ( !current_user_can( 'switch_themes' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+		wp_die( __( 'You do not have sufficient permissions to access this page.', 'extlb-lp' ) );
 	}
 
 	// HTML of the options-page
 	?>
 
 	<div class="wrap">
-		<h1>Extendlab - Link Preview Settings</h1>
+		<h1><?php _e('Extendlab - Link Preview Settings', 'extlb-lp') ?></h1>
 		<form method="post" action="options.php">
 			<?php settings_fields( 'extlb-options' ); ?>
 			<?php do_settings_sections( 'extlb-options' ); ?>
 			<table class="form-table">
 				<tbody>
 					<tr>
-						<th scope="row">Appearance</th>
+						<th scope="row"><?php _e(Appearance, 'extlb-lp') ?></th>
 						<td>
 							<fieldset>
 								<label for="extlb_darkmode">
 										<input type="checkbox" id="extlb_darkmode" name="extlb_darkmode" <?php echo (get_option('extlb_darkmode') == 'on') ? 'checked' : 'false'; ?>/>
-										Darkmode on
+										<?php _e('Darkmode on', 'extlb-lp') ?>
 								</label>
-								<p class="description">You can choose if you want a dark grey or a white popup</p>
+								<p class="description"><?php _e('You can choose if you want a dark grey or a white popup', 'extlb-lp') ?></p>
 							</fieldset>
 						</td>
 					</tr>
@@ -53,34 +53,34 @@ function extlbOptionsPage() {
 							<fieldset>
 								<label for="extlb_hide_thumbnails">
 										<input type="checkbox" id="extlb_hide_thumbnails" name="extlb_hide_thumbnails"<?php echo (get_option('extlb_hide_thumbnails') == 'on') ? 'checked' : 'false'; ?>/>
-										Hide Thumbnails
+										<?php _e('Hide Thumbnails', 'extlb-lp') ?>
 								</label>
-								<p class="description">You can toggle the visibility of the article thumbnails inside the popup</p>
+								<p class="description"><?php _e('You can toggle the visibility of the article thumbnails inside the popup', 'extlb-lp') ?></p>
 							</fieldset>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row">Visibility</th>
+						<th scope="row"><?php _e('Visibility', 'extlb-lp') ?></th>
 						<td>
 							<fieldset>
 								<label for="extlb_disable_mobile">
 										<input type="checkbox" id="extlb_disable_mobile" name="extlb_disable_mobile"<?php echo (get_option('extlb_disable_mobile') == 'on') ? 'checked' : 'false'; ?>/>
-										Hide on mobile (< 720px)
+										<?php _e('Hide on mobile (< 720px)', 'extlb-lp') ?>
 								</label>
-								<p class="description">You can choose if you want to deactivate the popup on mobile devices</p>
+								<p class="description"><?php _e('You can choose if you want to deactivate the popup on mobile devices', 'extlb-lp') ?></p>
 							</fieldset>
 						</td>
 					</tr>
 
 					<tr>
-						<th scope="row">Selector</th>
+						<th scope="row"><?php _e('Selector', 'extlb-lp') ?></th>
 						<td>
 							<fieldset>
 								<label for="extlb_link_selector">
 										<input type="text" id="extlb_link_selector" name="extlb_link_selector" value="<?php echo esc_attr( get_option('extlb_link_selector') ); ?>" />
-										Your custom css selector
+										<?php _e('Your custom css selector', 'extlb-lp') ?>
 								</label>
-								<p class="description">Add your custom CSS selector here, the default is .entry-content a</p>
+								<p class="description"><?php _e('Add your custom CSS selector here, the default is .entry-content a', 'extlb-lp') ?></p>
 							</fieldset>
 						</td>
 					</tr>
@@ -88,7 +88,7 @@ function extlbOptionsPage() {
 
 			</table>
 
-			<?php submit_button(); ?>
+			<?php submit_button( __('Save Settings', 'extlb-lp') ); ?>
 		</form>
 	</div>
 
