@@ -40,6 +40,12 @@ function extlbPluginSiteLinks( $links ) {
 	return array_merge( $links, $mylinks );
 }
 
+// Load translation
+add_action('plugins_loaded', 'extlb_translations');
+function extlb_translations() {
+	load_plugin_textdomain( 'extlb-lp', false, dirname(plugin_basename(__FILE__)).'/languages/' );
+}
+
 // Create custom image size
 function extlb_image_sizes(){
 	add_image_size( 'extlb_post_thumbnail', 350, 160, array( 'center', 'center' ) );
