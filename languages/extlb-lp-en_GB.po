@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Extendlab – Link Preview - V1.0.0\n"
+"Report-Msgid-Bugs-To: support@extendlab.de\n"
+"Last-TranslatoBugs-To: support@extendlab.de\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Simon Pirmann\n"
+"Language-Team: Extendlab – support@extendlab.de\n"
+"X-Generator: Poedit 2.2.1\n"
+
+msgid "Add your custom CSS selector here, the default is .entry-content a"
+msgstr "Add your custom CSS selector here, the default is .entry-content a"
+
+msgid "Darkmode on"
+msgstr "Darkmode on"
+
+msgid "Extendlab - Link Preview"
+msgstr "Extendlab - Link Preview"
+
+msgid "Extendlab - Link Preview Settings"
+msgstr "Extendlab - Link Preview Settings"
+
+msgid "Hide Thumbnails"
+msgstr "Hide Thumbnails"
+
+msgid "Hide on mobile (< 720px)"
+msgstr "Hide on mobile (< 720px)"
+
+msgid "Save Settings"
+msgstr "Save Settings"
+
+msgid "Selector"
+msgstr "Selector"
+
+msgid "Visibility"
+msgstr "Visibility"
+
+msgid "You can choose if you want a dark grey or a white popup"
+msgstr "You can choose if you want a dark grey or a white popup"
+
+msgid "You can choose if you want to deactivate the popup on mobile devices"
+msgstr "You can choose if you want to deactivate the popup on mobile devices"
+
+msgid "You can toggle the visibility of the article thumbnails inside the popup"
+msgstr "You can toggle the visibility of the article thumbnails inside the popup"
+
+msgid "You do not have sufficient permissions to access this page."
+msgstr "You do not have sufficient permissions to access this page."
+
+msgid "Your custom css selector"
+msgstr "Your custom css selector"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "More by Extendlab"
+msgstr "More by Extendlab"
+
+msgid "Transmission successful!"
+msgstr "Transmission successful!"
+
+msgid "Post-Title or Post-Content is NULL."
+msgstr "Post-Title or Post-Content is NULL."
+
+msgid "Read more..."
+msgstr "Read more..."
