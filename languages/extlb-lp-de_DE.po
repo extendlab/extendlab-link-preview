@@ -41,6 +41,9 @@ msgstr "Selektor"
 msgid "Visibility"
 msgstr "Sichtbarkeit"
 
+msgid "Appearance"
+msgstr "Aussehen"
+
 msgid "You can choose if you want a dark grey or a white popup"
 msgstr "Du kannst wählen, ob du ein dunkelgraues oder weißes Popup möchtest"
 
