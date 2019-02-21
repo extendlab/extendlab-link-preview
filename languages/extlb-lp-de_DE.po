@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Extendlab – Link Preview - V1.0.0\n"
+"Report-Msgid-Bugs-To: support@extendlab.de\n"
+"Last-TranslatoBugs-To: support@extendlab.de\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Simon Pirmann\n"
+"Language-Team: Extendlab – support@extendlab.de\n"
+"X-Generator: Poedit 2.2.1\n"
+
+msgid "Add your custom CSS selector here, the default is .entry-content a"
+msgstr "Füge hier deinen individuellen CSS-Seketor ein, der Standard ist .entry-content a"
+
+msgid "Darkmode on"
+msgstr "Dunkler Modus an"
+
+msgid "Extendlab - Link Preview"
+msgstr "Extendlab - Link Preview"
+
+msgid "Extendlab - Link Preview Settings"
+msgstr "Extendlab - Link Preview Einstellungen"
+
+msgid "Hide Thumbnails"
+msgstr "Vorschaubilder ausblenden"
+
+msgid "Hide on mobile (< 720px)"
+msgstr "Auf mobile ausblenden (< 720px)"
+
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+msgid "Selector"
+msgstr "Selektor"
+
+msgid "Visibility"
+msgstr "Sichtbarkeit"
+
+msgid "Appearance"
+msgstr "Aussehen"
+
+msgid "You can choose if you want a dark grey or a white popup"
+msgstr "Du kannst wählen, ob du ein dunkelgraues oder weißes Popup möchtest"
+
+msgid "You can choose if you want to deactivate the popup on mobile devices"
+msgstr "Du kannst wählen, ob du das Popup auf mobilen Geräten deaktivieren willst"
+
+msgid "You can toggle the visibility of the article thumbnails inside the popup"
+msgstr "Du kannst die Sichtbarkeit der Vorschaubilder innerhalb des Popups wählen"
+
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Du hast nicht genügend Berechtigungen, um auf diese Seite zuzugreifen."
+
+msgid "Your custom css selector"
+msgstr "Dein individueller CSS-Selektor"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "More by Extendlab"
+msgstr "Mehr von Extendlab"
+
+msgid "Transmission successful!"
+msgstr "Übertragung erfolgreich!"
+
+msgid "Post-Title or Post-Content is NULL."
+msgstr "Post-Titel oder Post-Inhalt ist NULL."
+
+msgid "Read more..."
+msgstr "Mehr erfahren…"

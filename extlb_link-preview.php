@@ -33,11 +33,17 @@ add_action( 'wp_enqueue_scripts', 'extlb_scripts_styles' );
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'extlbPluginSiteLinks' );
 function extlbPluginSiteLinks( $links ) {
 	$mylinks = array(
-		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">Settings</a>',
-		'<a href="https://extendlab.de" target="_blank">More by Extendlab</a>'
+		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">' . __('Settings', 'extlb-lp') . '</a>',
+		'<a href="https://extendlab.de" target="_blank">' . __('More by Extendlab', 'extlb-lp') . '</a>'
 	);
 
 	return array_merge( $links, $mylinks );
+}
+
+// Load translation
+add_action('plugins_loaded', 'extlb_translations');
+function extlb_translations() {
+	load_plugin_textdomain( 'extlb-lp', false, dirname(plugin_basename(__FILE__)).'/languages/' );
 }
 
 // Create custom image size
@@ -50,7 +56,7 @@ add_action( 'init', 'extlb_image_sizes' );
 function extlb_show_link_preview (){
 	$link = $_POST['link'] ;
 	$status = 'success';
-	$status_message = 'Übertragung erfolgreich!';
+	$status_message = __('Transmission successful!', 'extlb-lp');
 	$options = array(
 		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
 		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
@@ -85,7 +91,7 @@ function extlb_show_link_preview (){
 
 	if ($post_title == NULL || $post_content == NULL) {
 		$status = 'error';
-		$status_message = 'Post-Title or Post-Content is NULL.';
+		$status_message = __('Post-Title or Post-Content is NULL.', 'extlb-lp');
 	}
 
 	$return = [
@@ -95,6 +101,7 @@ function extlb_show_link_preview (){
 		'title' => $post_title,
 		'excerpt' => $post_content,
 		'thumbnail' => $post_thumbnail,
+		'read_more_text' => __('Read more...', 'extlb-lp'),
 		'options' => $options
 	];
 
