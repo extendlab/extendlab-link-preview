@@ -1,6 +1,8 @@
 === Extendlab – Link Preview ===
-Tags: popup, preview, links,
+Tags: popup, preview, links
+Stable tag: trunk
 Requires at least: 4.6
+Requires PHP: 5.3
 Tested up to: 5.0.3
 License: GPLv2 or later
 
