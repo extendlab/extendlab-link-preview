@@ -1,0 +1,36 @@
+{
+  "name": "extlb_link-preview",
+  "version": "1.0.0",
+  "description": "Plugin to show a short preview of (internal) linked pages or posts",
+  "main": "gulpfile.js",
+  "scripts": {
+    "dev": "gulp dev",
+    "build": "gulp build && gulp zip"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/extendlab/extlb_link-preview.git"
+  },
+  "keywords": [
+    "popup",
+    "tooltip",
+    "link",
+    "preview",
+    "preview",
+    "internal",
+    "link"
+  ],
+  "author": "Extendlab",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/extendlab/extlb_link-preview/issues"
+  },
+  "homepage": "https://github.com/extendlab/extlb_link-preview#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-zip": "^4.2.0"
+  }
+}
