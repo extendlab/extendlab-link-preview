@@ -14,12 +14,12 @@ Author: Extendlab
 Author URI: https://extendlab.de
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: extlb-lp
+Text Domain: extlb_link-preview
 Domain Path: /languages
 */
 
 // ADD THE PLUGIN SCRIPS AND STYLES
-function extlb_scripts_styles(){
+function extlbScriptsStyles(){
 	wp_register_script( 'extlb_link-preview', plugins_url( '/assets/js/extlb_link-preview.js', __FILE__ ), array( 'jquery' ), '1.1', true );
 	wp_enqueue_script( 'extlb_link-preview' );
 
@@ -27,36 +27,36 @@ function extlb_scripts_styles(){
 
 	wp_enqueue_style( 'extlb_link-preview', plugins_url( '/assets/css/extlb_link-preview.css', __FILE__ ), '', '1.1' );
 }
-add_action( 'wp_enqueue_scripts', 'extlb_scripts_styles' );
+add_action( 'wp_enqueue_scripts', 'extlbScriptsStyles' );
 
 // Adding links to plugins-overview-page
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'extlbPluginSiteLinks' );
 function extlbPluginSiteLinks( $links ) {
 	$mylinks = array(
-		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">' . __('Settings', 'extlb-lp') . '</a>',
-		'<a href="https://extendlab.de" target="_blank">' . __('More by Extendlab', 'extlb-lp') . '</a>'
+		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">' . __('Settings', 'extlb_link-preview') . '</a>',
+		'<a href="https://extendlab.de" target="_blank">' . __('More by Extendlab', 'extlb_link-preview') . '</a>'
 	);
 
 	return array_merge( $links, $mylinks );
 }
 
 // Load translation
-add_action('plugins_loaded', 'extlb_translations');
-function extlb_translations() {
-	load_plugin_textdomain( 'extlb-lp', false, dirname(plugin_basename(__FILE__)).'/languages/' );
+add_action('plugins_loaded', 'extlbTranslations');
+function extlbTranslations() {
+	load_plugin_textdomain( 'extlb_link-preview', false, dirname(plugin_basename(__FILE__)).'/languages/' );
 }
 
 // Create custom image size
-function extlb_image_sizes(){
+function extlbImageSizes(){
 	add_image_size( 'extlb_post_thumbnail', 350, 160, array( 'center', 'center' ) );
 }
-add_action( 'init', 'extlb_image_sizes' );
+add_action( 'init', 'extlbImageSizes' );
 
 // HERE THE AJAX-FUNCTION
-function extlb_show_link_preview (){
+function extlbShowLinkPreview (){
 	$link = $_POST['link'] ;
 	$status = 'success';
-	$status_message = __('Transmission successful!', 'extlb-lp');
+	$status_message = __('Transmission successful!', 'extlb_link-preview');
 	$options = array(
 		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
 		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
@@ -76,14 +76,14 @@ function extlb_show_link_preview (){
 	if ($this_host == $link_host) {
 		$link_type = 'intern';
 
-		$this_post = get_post_by_link( $link );
+		$this_post = extlbGetPostByLink( $link );
 
 	} else {
 		$link_type = 'extern';
 	}
 
 	$post_title = $this_post->post_title;
-	$post_content = generate_excerpt( $this_post->post_content );
+	$post_content = extlbGenerateExcerpt( $this_post->post_content );
 	$post_thumbnail = null;
 	if (has_post_thumbnail($this_post)) {
 		$post_thumbnail = get_the_post_thumbnail_url($this_post, 'extlb_post_thumbnail');
@@ -91,7 +91,7 @@ function extlb_show_link_preview (){
 
 	if ($post_title == NULL || $post_content == NULL) {
 		$status = 'error';
-		$status_message = __('Post-Title or Post-Content is NULL.', 'extlb-lp');
+		$status_message = __('Post-Title or Post-Content is NULL.', 'extlb_link-preview');
 	}
 
 	$return = [
@@ -101,7 +101,7 @@ function extlb_show_link_preview (){
 		'title' => $post_title,
 		'excerpt' => $post_content,
 		'thumbnail' => $post_thumbnail,
-		'read_more_text' => __('Read more...', 'extlb-lp'),
+		'read_more_text' => __('Read more...', 'extlb_link-preview'),
 		'options' => $options
 	];
 
@@ -110,35 +110,15 @@ function extlb_show_link_preview (){
 
 	wp_die(); // this is required to terminate immediately and return a proper response
 }
-add_action( 'wp_ajax_show_link_preview', 'extlb_show_link_preview' );
-add_action( 'wp_ajax_nopriv_show_link_preview', 'extlb_show_link_preview' );
+add_action( 'wp_ajax_show_link_preview', 'extlbShowLinkPreview' );
+add_action( 'wp_ajax_nopriv_show_link_preview', 'extlbShowLinkPreview' );
 
-function extlb_get_options (){
-	$options = array(
-		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
-		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
-		'hide_thumbnails' => (get_option('extlb_hide_thumbnails') == 'on') ? true : false,
-		'link_selector' => esc_attr( get_option('extlb_link_selector') )
-	);
-
-	$return = [
-		'options' => $options
-	];
-
-	header('Content-Type: application/json');
-	echo json_encode($return);
-
-	wp_die(); // this is required to terminate immediately and return a proper response
-}
-add_action( 'wp_ajax_extlb_get_options', 'extlb_get_options' );
-add_action( 'wp_ajax_nopriv_extlb_get_options', 'extlb_get_options' );
-
-function get_post_by_link( $link ) {
+function extlbGetPostByLink( $link ) {
 	$post_ID = url_to_postid( $link );
 	return get_post( $post_ID );
 }
 
-function generate_excerpt( $text, $chars = 100 ) {
+function extlbGenerateExcerpt( $text, $chars = 100 ) {
 	$text = wp_strip_all_tags( $text );
 
 	if(strlen($text) > $chars) {
