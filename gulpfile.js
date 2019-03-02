@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 
 var projectName = 'extlb_link-preview';
 var buildFolder = '_build';
-var sourceFiles = ['assets/css/**', 'assets/js/' + projectName + '.min.js', projectName + '.php', 'index.php', 'includes/**','languages/**', 'LICENSE'];
+var sourceFiles = ['assets/css/**', 'assets/js/' + projectName + '.min.js', projectName + '.php', 'index.php', 'includes/**','languages/**', 'LICENSE', 'readme.txt'];
 
 
 gulp.task('sass', function() {
