@@ -14,18 +14,18 @@ Author: Extendlab
 Author URI: https://extendlab.de
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: extlb_link-preview
+Text Domain: extendlab-link-preview
 Domain Path: /languages
 */
 
 // ADD THE PLUGIN SCRIPS AND STYLES
 function extlbScriptsStyles(){
-	wp_register_script( 'extlb_link-preview', plugins_url( '/assets/js/extlb_link-preview.js', __FILE__ ), array( 'jquery' ), '1.1', true );
-	wp_enqueue_script( 'extlb_link-preview' );
+	wp_register_script( 'extendlab-link-preview', plugins_url( '/assets/js/extlb_link-preview.js', __FILE__ ), array( 'jquery' ), '1.1', true );
+	wp_enqueue_script( 'extendlab-link-preview' );
 
-	wp_localize_script( 'extlb_link-preview', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'special_value' => 'insert your stuff' ) );
+	wp_localize_script( 'extendlab-link-preview', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'special_value' => 'insert your stuff' ) );
 
-	wp_enqueue_style( 'extlb_link-preview', plugins_url( '/assets/css/extlb_link-preview.css', __FILE__ ), '', '1.1' );
+	wp_enqueue_style( 'extendlab-link-preview', plugins_url( '/assets/css/extlb_link-preview.css', __FILE__ ), '', '1.1' );
 }
 add_action( 'wp_enqueue_scripts', 'extlbScriptsStyles' );
 
@@ -33,8 +33,8 @@ add_action( 'wp_enqueue_scripts', 'extlbScriptsStyles' );
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'extlbPluginSiteLinks' );
 function extlbPluginSiteLinks( $links ) {
 	$mylinks = array(
-		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">' . esc_html__('Settings', 'extlb_link-preview') . '</a>',
-		'<a href="https://extendlab.de" target="_blank">' . esc_html__('More by Extendlab', 'extlb_link-preview') . '</a>'
+		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">' . esc_html__('Settings', 'extendlab-link-preview') . '</a>',
+		'<a href="https://extendlab.de" target="_blank">' . esc_html__('More by Extendlab', 'extendlab-link-preview') . '</a>'
 	);
 
 	return array_merge( $links, $mylinks );
@@ -43,7 +43,7 @@ function extlbPluginSiteLinks( $links ) {
 // Load translation
 add_action('plugins_loaded', 'extlbTranslations');
 function extlbTranslations() {
-	load_plugin_textdomain( 'extlb_link-preview', false, dirname(plugin_basename(__FILE__)).'/languages/' );
+	load_plugin_textdomain( 'extendlab-link-preview', false, dirname(plugin_basename(__FILE__)).'/languages/' );
 }
 
 // Create custom image size
@@ -56,7 +56,7 @@ add_action( 'init', 'extlbImageSizes' );
 function extlbShowLinkPreview (){
 	$link = esc_url_raw($_POST['link']);
 	$status = 'success';
-	$status_message = esc_html__('Transmission successful!', 'extlb_link-preview');
+	$status_message = esc_html__('Transmission successful!', 'extendlab-link-preview');
 	$options = array(
 		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
 		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
@@ -91,7 +91,7 @@ function extlbShowLinkPreview (){
 
 	if ($post_title == NULL || $post_content == NULL) {
 		$status = 'error';
-		$status_message = esc_html__('Post-Title or Post-Content is NULL.', 'extlb_link-preview');
+		$status_message = esc_html__('Post-Title or Post-Content is NULL.', 'extendlab-link-preview');
 	}
 
 	$return = [
@@ -101,7 +101,7 @@ function extlbShowLinkPreview (){
 		'title' => $post_title,
 		'excerpt' => $post_content,
 		'thumbnail' => $post_thumbnail,
-		'read_more_text' => esc_html__('Read more...', 'extlb_link-preview'),
+		'read_more_text' => esc_html__('Read more...', 'extendlab-link-preview'),
 		'options' => $options
 	];
 
