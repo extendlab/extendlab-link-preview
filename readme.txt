@@ -3,7 +3,7 @@ Tags: popup, preview, links
 Stable tag: trunk
 Requires at least: 4.6
 Requires PHP: 5.3
-Tested up to: 5.0.3
+Tested up to: 5.1
 License: GPLv2 or later
 
 Plugin to show a short preview of (internal) linked pages or posts.
@@ -15,6 +15,6 @@ With this tiny plugin you can add a preview to internal linked pages or posts.
 From your WordPress administration panel, go to `Plugins > Add New` and click the `Upload Plugin` button at the top of the page.
 
 == Screenshots ==
-1. This is our screenshot #1 description
-2. This is our screenshot #2 description
-3. This is our screenshot #3 description
+1. Internal link preview on live site
+2. Choose between dark and light mode
+3. This are the backend options
