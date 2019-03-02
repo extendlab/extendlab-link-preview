@@ -33,8 +33,8 @@ add_action( 'wp_enqueue_scripts', 'extlbScriptsStyles' );
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'extlbPluginSiteLinks' );
 function extlbPluginSiteLinks( $links ) {
 	$mylinks = array(
-		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">' . __('Settings', 'extlb_link-preview') . '</a>',
-		'<a href="https://extendlab.de" target="_blank">' . __('More by Extendlab', 'extlb_link-preview') . '</a>'
+		'<a href="'. esc_url( get_admin_url(null, 'options-general.php?page=extlb-options-page') ) .'">' . esc_html__('Settings', 'extlb_link-preview') . '</a>',
+		'<a href="https://extendlab.de" target="_blank">' . esc_html__('More by Extendlab', 'extlb_link-preview') . '</a>'
 	);
 
 	return array_merge( $links, $mylinks );
@@ -54,9 +54,9 @@ add_action( 'init', 'extlbImageSizes' );
 
 // HERE THE AJAX-FUNCTION
 function extlbShowLinkPreview (){
-	$link = $_POST['link'] ;
+	$link = esc_url_raw($_POST['link']);
 	$status = 'success';
-	$status_message = __('Transmission successful!', 'extlb_link-preview');
+	$status_message = esc_html__('Transmission successful!', 'extlb_link-preview');
 	$options = array(
 		'darkmode' => (get_option('extlb_darkmode') == 'on') ? true : false,
 		'disable_mobile' => (get_option('extlb_disable_mobile') == 'on') ? true : false,
@@ -91,7 +91,7 @@ function extlbShowLinkPreview (){
 
 	if ($post_title == NULL || $post_content == NULL) {
 		$status = 'error';
-		$status_message = __('Post-Title or Post-Content is NULL.', 'extlb_link-preview');
+		$status_message = esc_html__('Post-Title or Post-Content is NULL.', 'extlb_link-preview');
 	}
 
 	$return = [
@@ -101,7 +101,7 @@ function extlbShowLinkPreview (){
 		'title' => $post_title,
 		'excerpt' => $post_content,
 		'thumbnail' => $post_thumbnail,
-		'read_more_text' => __('Read more...', 'extlb_link-preview'),
+		'read_more_text' => esc_html__('Read more...', 'extlb_link-preview'),
 		'options' => $options
 	];
 

@@ -11,8 +11,8 @@ if ( is_admin() ){
 function extlbRegisterMenuEntry() {
 	// add_options_page( 'Link Preview Settings', 'Link Preview', 'switch_themes', 'extlb-options-page', 'extlbOptionsPage', $icon_url, $position );
 
-	$page_title = __('Extendlab - Link Preview Settings', 'extlb_link-preview');
-	$menu_title = __('Extendlab - Link Preview', 'extlb_link-preview');
+	$page_title = esc_html__('Extendlab - Link Preview Settings', 'extlb_link-preview');
+	$menu_title = esc_html__('Extendlab - Link Preview', 'extlb_link-preview');
 	$capability = 'switch_themes';
 	$menu_slug = 'extlb-options-page';
 	$function = 'extlbOptionsPage';
@@ -22,7 +22,7 @@ function extlbRegisterMenuEntry() {
 // The options-page function
 function extlbOptionsPage() {
 	if ( !current_user_can( 'switch_themes' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.', 'extlb_link-preview' ) );
+		wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'extlb_link-preview' ) );
 	}
 
 	// HTML of the options-page
@@ -88,7 +88,7 @@ function extlbOptionsPage() {
 
 			</table>
 
-			<?php submit_button( __('Save Settings', 'extlb_link-preview') ); ?>
+			<?php submit_button( esc_html__('Save Settings', 'extlb_link-preview') ); ?>
 		</form>
 	</div>
 
